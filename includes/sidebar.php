@@ -1,3 +1,5 @@
+
+
 <div class="sidebar">
     <div class="sidebar-brand">
         <h4><i class="bi bi-heart-fill"></i> <span>Orientação</span></h4>
@@ -47,3 +49,5 @@
         </ul>
     </div>
 </div>
+<div class="main-content">
+       <div class="container-fluid">
