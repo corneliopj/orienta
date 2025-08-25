@@ -3,7 +3,7 @@
         <h2 class="page-header">Gerenciamento de Alunos</h2>
         
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-            <a href="alunos.php?editar=0" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Novo Aluno</a>
+            <a href="./index.php?editar=0" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Novo Aluno</a>
         </div>
         
         <div class="card shadow">
@@ -32,7 +32,7 @@
                                     <td><?php echo htmlspecialchars($aluno['turma']); ?></td>
                                     <td><?php echo htmlspecialchars($aluno['responsavel']); ?></td>
                                     <td>
-                                        <a href="alunos.php?editar=<?php echo $aluno['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+                                        <a href="./index.php?editar=<?php echo $aluno['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
                                         <form method="POST" name="form-delete" style="display:inline-block">
                                             <input type="hidden" name="id" value="<?php echo $aluno['id']; ?>">
                                             <input type="hidden" name="excluir" value="1">

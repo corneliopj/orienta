@@ -34,10 +34,10 @@ require_once __DIR__ . '/../includes/header.php';
 if (isset($_GET['editar'])) {
     $id = $_GET['editar'] !== '0' ? $_GET['editar'] : null;
     $aluno = $id ? getAlunoById($id) : null;
-    require_once __DIR__ . '/../views/aluno/formulario.php';
+    require_once __DIR__ . './formulario.php';
 } else {
     $alunos = getAlunos();
-    require_once __DIR__ . '/../views/aluno/listar.php';
+    require_once __DIR__ . './listar.php';
 }
 
 require_once __DIR__ . '/../includes/footer.php';
