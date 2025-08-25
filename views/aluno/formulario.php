@@ -1,13 +1,13 @@
 <div class="row">
     <div class="col">
-        <h2 class="page-header"><?php echo $id ? 'Editar Aluno' : 'Cadastrar Novo Aluno'; ?></h2>
+        <h2 class="page-header"><?php echo $aluno ? 'Editar Aluno' : 'Cadastrar Novo Aluno'; ?></h2>
         
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
-                <h3 class="card-title"><i class="bi bi-person-plus"></i> <?php echo $id ? 'Editar Aluno' : 'Cadastrar Aluno'; ?></h3>
+                <h3 class="card-title"><i class="bi bi-person-plus"></i> <?php echo $aluno ? 'Editar Aluno' : 'Cadastrar Aluno'; ?></h3>
             </div>
             <div class="card-body">
-                <form method="POST">
+                <form method="POST" action="../public/index.php?pagina=aluno">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($aluno['id'] ?? ''); ?>">
                     
                     <div class="mb-3">
@@ -51,7 +51,7 @@
                     
                     <div class="d-grid gap-2 d-md-flex">
                         <button type="submit" class="btn btn-primary me-md-2"><i class="bi bi-save"></i> Salvar</button>
-                        <a href="alunos.php" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
+                        <a href="../public/index.php?pagina=aluno&acao=listar" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
                     </div>
                 </form>
             </div>
