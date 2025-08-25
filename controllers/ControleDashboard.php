@@ -1,5 +1,5 @@
 <?php
-// Incluir o modelo para acessar os dados
+// Incluir os modelos para acessar os dados
 require_once ROOT_PATH . '/models/AlunoModel.php';
 require_once ROOT_PATH . '/models/ProfessorModel.php';
 require_once ROOT_PATH . '/models/AtendimentoModel.php';

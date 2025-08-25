@@ -16,6 +16,11 @@ class AlunoModel {
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
+    
+    public function getTotalAlunos() {
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM alunos");
+        return $stmt->fetchColumn();
+    }
 
     public function salvarAluno($dados) {
         $id = $dados['id'] ?? null;
