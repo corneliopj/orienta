@@ -26,7 +26,7 @@ require_once '../includes/header.php';
 require_once '../includes/sidebar.php';
 
 // Inclui a visão selecionada
-require_once '../views/' . $view . '.php';
+require_once '../views/' . $view . '/listar.php';
 
 // Inclui o rodapé
 require_once '../includes/footer.php';
