@@ -1,42 +1,43 @@
 <?php
-// Incluir o arquivo de configuração (subindo um nível para a pasta raiz do projeto)
-require_once '../config/config.php';
+// Carregar arquivos de configuração e classes
+require_once __DIR__ . '/../../config/config.php';
+require_once __DIR__ . '/../../config/functions.php'; // Manter temporariamente para formatação de data
+require_once __DIR__ . '/../../models/AlunoModel.php';
 
-// Definir a página padrão e a ação padrão
-$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 'dashboard';
-$acao = isset($_GET['acao']) ? $_GET['acao'] : 'listar';
+// Definir a página e ação padrão
+$pagina = $_GET['pagina'] ?? 'dashboard';
+$acao = $_GET['acao'] ?? 'listar';
 
-
-
-// Lógica para carregar o controlador e a visualização
 $viewPath = '';
 $controllerPath = '';
 
 switch ($pagina) {
     case 'dashboard':
-        $controllerPath = '../controllers/dashboard.php';
         $viewPath = '../views/dashboard.php';
         break;
     case 'aluno':
         $controllerPath = '../controllers/ControleAlunos.php';
-        // A lógica de qual view carregar está dentro do controlador
         break;
-    // ... (outros casos)
+    // Adicionar outros casos aqui para professores, atendimentos, etc.
+    // case 'professor':
+    //     $controllerPath = '../controllers/ControleProfessores.php';
+    //     break;
     default:
-        $controllerPath = '../controllers/dashboard.php';
         $viewPath = '../views/dashboard.php';
 }
+
+// Incluir o cabeçalho
+require_once __DIR__ . '/../../includes/header.php';
 
 // Carregar o controlador, se houver
 if (!empty($controllerPath) && file_exists($controllerPath)) {
     require_once $controllerPath;
 }
 
+// Carregar a visualização
+if (!empty($viewPath) && file_exists($viewPath)) {
+    require_once $viewPath;
+}
 
-
-// Carregar o layout e a visualização
-require_once '../includes/header.php';
-require_once '../includes/sidebar.php';
-require_once $viewPath;
-require_once '../includes/footer.php';
-?>
+// Incluir o rodapé
+require_once __DIR__ . '/../../includes/footer.php';
