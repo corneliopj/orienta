@@ -232,3 +232,6 @@
                 </div>
             </div>
         </div>
+        <?php
+        require_once ROOT_PATH . '/includes/sidebar.php';
+        ?>

@@ -29,6 +29,7 @@ switch ($pagina) {
 // Incluir o cabeçalho
 require_once ROOT_PATH . '/includes/header.php';
 
+
 // Carregar o controlador, se houver
 if (!empty($controllerPath) && file_exists($controllerPath)) {
     require_once $controllerPath;
