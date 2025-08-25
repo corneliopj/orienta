@@ -33,5 +33,3 @@ if ($acao === 'formulario') {
     $alunos = $alunoModel->getAlunos();
     $viewPath = '../views/aluno/listar.php';
 }
-
-// A variável $viewPath é usada no index.php para carregar a view correta.
