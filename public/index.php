@@ -1,33 +1,39 @@
-
 <?php
-// Incluir o arquivo de configuração e a lógica do controlador do dashboard
+// Incluir o arquivo de configuração (subindo um nível para a pasta raiz do projeto)
 require_once '../config/config.php';
-require_once '../controllers/dashboard.php';
 
-// Roteamento simples baseado no parâmetro 'pagina'
-$view = 'dashboard'; // A visão padrão é o dashboard
+// Definir a página padrão e a ação padrão
+$pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 'dashboard';
+$acao = isset($_GET['acao']) ? $_GET['acao'] : 'listar';
 
-if (isset($_GET['pagina'])) {
-    $pagina = $_GET['pagina'];
+// Lógica para determinar qual arquivo de visualização carregar
+$viewPath = '';
+$controllerPath = '';
 
-    // Verifique se o arquivo da visão existe antes de incluir
-    $viewPath = '../views/' . $pagina . '.php';
-    if (file_exists($viewPath)) {
-        $view = $pagina;
-    } else {
-        // Opcional: Redirecionar para uma página de erro ou para o dashboard
-        // Por enquanto, vamos manter o dashboard como padrão caso a página não exista
-        $view = 'dashboard';
+if ($pagina === 'dashboard') {
+    // Para o dashboard, a lógica e a visualização estão em arquivos separados
+    $controllerPath = '../controllers/dashboard.php';
+    $viewPath = '../views/dashboard.php';
+} else {
+    // Para outras páginas, construimos o caminho para o arquivo de visualização
+    // Exemplo: views/aluno/listar.php
+    $viewPath = '../views/' . $pagina . '/' . $acao . '.php';
+
+    // Se o arquivo da visualização não existir, voltamos para o dashboard
+    if (!file_exists($viewPath)) {
+        $controllerPath = '../controllers/dashboard.php';
+        $viewPath = '../views/dashboard.php';
     }
 }
 
-// Carrega as partes do layout
+// Carregar o controlador, se houver
+if (!empty($controllerPath) && file_exists($controllerPath)) {
+    require_once $controllerPath;
+}
+
+// Carregar o layout e a visualização
 require_once '../includes/header.php';
 require_once '../includes/sidebar.php';
-
-// Inclui a visão selecionada
-require_once '../views/' . $view . '/listar.php';
-
-// Inclui o rodapé
+require_once $viewPath;
 require_once '../includes/footer.php';
 ?>
