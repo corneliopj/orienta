@@ -1,10 +1,10 @@
 <div class="row">
     <div class="col">
-        <h2 class="page-header"><?php echo $aluno ? 'Editar Aluno' : 'Cadastrar Novo Aluno'; ?></h2>
+        <h2 class="page-header"><?php echo isset($aluno) ? 'Editar Aluno' : 'Cadastrar Novo Aluno'; ?></h2>
         
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
-                <h3 class="card-title"><i class="bi bi-person-plus"></i> <?php echo $aluno ? 'Editar Aluno' : 'Cadastrar Aluno'; ?></h3>
+                <h3 class="card-title"><i class="bi bi-person-plus"></i> <?php echo isset($aluno) ? 'Editar Aluno' : 'Cadastrar Aluno'; ?></h3>
             </div>
             <div class="card-body">
                 <form method="POST" action="../public/index.php?pagina=aluno">
