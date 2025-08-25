@@ -7,7 +7,7 @@
                 <h3 class="card-title"><i class="bi bi-person-plus"></i> <?php echo isset($aluno) ? 'Editar Aluno' : 'Cadastrar Aluno'; ?></h3>
             </div>
             <div class="card-body">
-                <form method="POST" action="../public/index.php?pagina=aluno">
+                <form method="POST" action="index.php?pagina=aluno">
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($aluno['id'] ?? ''); ?>">
                     
                     <div class="mb-3">
@@ -47,7 +47,7 @@
                     
                     <div class="d-grid gap-2 d-md-flex">
                         <button type="submit" class="btn btn-primary me-md-2"><i class="bi bi-save"></i> Salvar</button>
-                        <a href="../public/index.php?pagina=aluno&acao=listar" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
+                        <a href="index.php?pagina=aluno&acao=listar" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
                     </div>
                 </form>
             </div>
