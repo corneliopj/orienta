@@ -6,30 +6,33 @@ require_once '../config/config.php';
 $pagina = isset($_GET['pagina']) ? $_GET['pagina'] : 'dashboard';
 $acao = isset($_GET['acao']) ? $_GET['acao'] : 'listar';
 
-// Lógica para determinar qual arquivo de visualização carregar
+
+
+// Lógica para carregar o controlador e a visualização
 $viewPath = '';
 $controllerPath = '';
 
-if ($pagina === 'dashboard') {
-    // Para o dashboard, a lógica e a visualização estão em arquivos separados
-    $controllerPath = '../controllers/dashboard.php';
-    $viewPath = '../views/dashboard.php';
-} else {
-    // Para outras páginas, construimos o caminho para o arquivo de visualização
-    // Exemplo: views/aluno/listar.php
-    $viewPath = '../views/' . $pagina . '/' . $acao . '.php';
-
-    // Se o arquivo da visualização não existir, voltamos para o dashboard
-    if (!file_exists($viewPath)) {
+switch ($pagina) {
+    case 'dashboard':
         $controllerPath = '../controllers/dashboard.php';
         $viewPath = '../views/dashboard.php';
-    }
+        break;
+    case 'aluno':
+        $controllerPath = '../controllers/ControleAlunos.php';
+        // A lógica de qual view carregar está dentro do controlador
+        break;
+    // ... (outros casos)
+    default:
+        $controllerPath = '../controllers/dashboard.php';
+        $viewPath = '../views/dashboard.php';
 }
 
 // Carregar o controlador, se houver
 if (!empty($controllerPath) && file_exists($controllerPath)) {
     require_once $controllerPath;
 }
+
+
 
 // Carregar o layout e a visualização
 require_once '../includes/header.php';
