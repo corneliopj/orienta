@@ -1,6 +1,6 @@
 <?php
 // Incluir o novo modelo de Aluno
-require_once '../models/AlunoModel.php';
+require_once ROOT_PATH . '/models/AlunoModel.php';
 
 // Criar uma instância do modelo, passando a conexão PDO
 $alunoModel = new AlunoModel($pdo);
@@ -27,9 +27,9 @@ if ($acao === 'formulario') {
     if ($id) {
         $aluno = $alunoModel->getAlunoById($id);
     }
-    $viewPath = '../views/aluno/formulario.php';
+    $viewPath = ROOT_PATH . '/views/aluno/formulario.php';
 } else {
     // Lógica para Exibir a Lista de Alunos - GET
     $alunos = $alunoModel->getAlunos();
-    $viewPath = '../views/aluno/listar.php';
+    $viewPath = ROOT_PATH . '/views/aluno/listar.php';
 }
