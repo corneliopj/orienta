@@ -4,8 +4,7 @@ define('ROOT_PATH', __DIR__ . '/..');
 
 // Carregar arquivos de configuração e classes
 require_once ROOT_PATH . '/config/config.php';
-require_once ROOT_PATH . '/config/functions.php';
-require_once ROOT_PATH . '/models/AlunoModel.php';
+require_once ROOT_PATH . '/config/functions.php'; // Manter temporariamente para formatação de data
 
 // Definir a página e ação padrão
 $pagina = $_GET['pagina'] ?? 'dashboard';
@@ -16,14 +15,15 @@ $controllerPath = '';
 
 switch ($pagina) {
     case 'dashboard':
-        $viewPath = ROOT_PATH . '/views/dashboard.php';
+        $controllerPath = ROOT_PATH . '/controllers/ControleDashboard.php';
         break;
     case 'aluno':
         $controllerPath = ROOT_PATH . '/controllers/ControleAlunos.php';
         break;
     // Adicionar outros casos aqui para professores, atendimentos, etc.
     default:
-        $viewPath = ROOT_PATH . '/views/dashboard.php';
+        $controllerPath = ROOT_PATH . '/controllers/ControleDashboard.php';
+        break;
 }
 
 // Incluir o cabeçalho
@@ -37,6 +37,9 @@ if (!empty($controllerPath) && file_exists($controllerPath)) {
 // Carregar a visualização
 if (!empty($viewPath) && file_exists($viewPath)) {
     require_once $viewPath;
+} else if ($pagina === 'dashboard') {
+    // Se a view não for definida pelo controlador (ex: dashboard), carrega aqui
+    require_once ROOT_PATH . '/views/dashboard.php';
 }
 
 // Incluir o rodapé
