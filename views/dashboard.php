@@ -1,6 +1,6 @@
 <?php
 // Certifique-se de que a conexão com o banco de dados está incluída aqui
-require_once __DIR__ . '/../../config/functions.php';
+require_once __DIR__ . '/../config/functions.php';
 
 // Inicialize as variáveis antes de usá-las para evitar avisos
 $totalAtendimentos = $pdo->query('SELECT COUNT(*) FROM atendimentos')->fetchColumn();
