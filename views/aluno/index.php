@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config/functions.php';
+require_once __DIR__ . '/../../config/functions.php';
 
 // Processar formulário
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require_once __DIR__ . '/../includes/header.php';
+require_once __DIR__ . '/../../includes/header.php';
 
 if (isset($_GET['editar'])) {
     $id = $_GET['editar'] !== '0' ? $_GET['editar'] : null;
@@ -40,4 +40,4 @@ if (isset($_GET['editar'])) {
     require_once __DIR__ . './listar.php';
 }
 
-require_once __DIR__ . '/../includes/footer.php';
+require_once __DIR__ . '/../../includes/footer.php';
