@@ -15,28 +15,24 @@
                         <input type="text" class="form-control" name="nome" value="<?php echo htmlspecialchars($aluno['nome'] ?? ''); ?>" required>
                     </div>
                     
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Matrícula</label>
-                            <input type="text" class="form-control" name="matricula" value="<?php echo htmlspecialchars($aluno['matricula'] ?? ''); ?>">
-                        </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Data de Nascimento</label>
-                            <input type="text" class="form-control date-mask" name="data_nascimento" placeholder="dd/mm/aaaa" value="<?php echo htmlspecialchars(formatDate($aluno['data_nascimento'] ?? '')); ?>">
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Matrícula</label>
+                        <input type="text" class="form-control" name="matricula" value="<?php echo htmlspecialchars($aluno['matricula'] ?? ''); ?>">
                     </div>
                     
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Turma</label>
-                            <input type="text" class="form-control" name="turma" value="<?php echo htmlspecialchars($aluno['turma'] ?? ''); ?>">
-                        </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Responsável</label>
-                            <input type="text" class="form-control" name="responsavel" value="<?php echo htmlspecialchars($aluno['responsavel'] ?? ''); ?>">
-                        </div>
+                    <div class="mb-3">
+                        <label class="form-label">Data de Nascimento</label>
+                        <input type="text" class="form-control date-mask" name="data_nascimento" placeholder="dd/mm/aaaa" value="<?php echo htmlspecialchars(formatDate($aluno['data_nascimento'] ?? '')); ?>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Turma</label>
+                        <input type="text" class="form-control" name="turma" value="<?php echo htmlspecialchars($aluno['turma'] ?? ''); ?>">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Responsável</label>
+                        <input type="text" class="form-control" name="responsavel" value="<?php echo htmlspecialchars($aluno['responsavel'] ?? ''); ?>">
                     </div>
                     
                     <div class="mb-3">
