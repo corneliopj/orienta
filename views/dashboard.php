@@ -1,3 +1,15 @@
+<?php
+// Certifique-se de que a conexão com o banco de dados está incluída aqui
+require_once __DIR__ . '/../../config/functions.php';
+
+// Inicialize as variáveis antes de usá-las para evitar avisos
+$totalAtendimentos = $pdo->query('SELECT COUNT(*) FROM atendimentos')->fetchColumn();
+$totalProfessores = $pdo->query('SELECT COUNT(*) FROM professores')->fetchColumn();
+$limit = 5; // Defina o limite de itens por página
+$pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+$offset = ($pagina - 1) * $limit;
+?>
 <div class="row">
     <div class="col-md-3 mb-4">
         <div class="stat-card card text-primary primary">
