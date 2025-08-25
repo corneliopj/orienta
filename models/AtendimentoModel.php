@@ -23,4 +23,9 @@ class AtendimentoModel {
         $stmt = $this->pdo->query("SELECT COUNT(*) FROM atendimentos WHERE status = 'aberto' OR status = 'em_andamento'");
         return $stmt->fetchColumn();
     }
+
+    public function getTotalEventos() {
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM eventos");
+        return $stmt->fetchColumn();
+    }
 }
