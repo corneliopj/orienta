@@ -47,6 +47,6 @@
 </div>
 <div class="main-content">
     <div class="topbar">
-       <iframe id="versiculo-del-dia" src="https://www.bibliatodo.com/pt/online/versiculo-del-dia-texto-2" style="width: 100%; height: 25vh;" frameborder="0" scrolling="no"></iframe>
+       <center><iframe loading="lazy" height="180" marginheight="0" src="https://www.internautascristaos.org/arquivos/versiculos/versiculos.html" frameborder="no" width="500" scrolling="auto" name="textos1"</iframe><center>
     </div>
     <div class="container-fluid">
