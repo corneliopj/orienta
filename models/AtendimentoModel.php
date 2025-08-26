@@ -75,7 +75,7 @@ class AtendimentoModel
         return $stmt->fetchColumn();
     }
 
-    
+
      public function getAtendimentosPaginados($limit, $offset)
     {
         $sql = "SELECT 
@@ -101,5 +101,31 @@ class AtendimentoModel
         $sql = "SELECT COUNT(*) FROM atendimentos";
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchColumn();
+    }
+    public function getAtendimentoComEventosById($id)
+    {
+        // Busca o atendimento principal
+        $sqlAtendimento = "SELECT 
+                            a.id, a.aluno_id, a.professor_id, a.data_atendimento, a.descricao, a.status, a.observacoes,
+                            al.nome as nome_aluno,
+                            p.nome as nome_professor
+                           FROM atendimentos a
+                           JOIN alunos al ON a.aluno_id = al.id
+                           JOIN professores p ON a.professor_id = p.id
+                           WHERE a.id = ?";
+        
+        $stmtAtendimento = $this->pdo->prepare($sqlAtendimento);
+        $stmtAtendimento->execute([$id]);
+        $atendimento = $stmtAtendimento->fetch(PDO::FETCH_ASSOC);
+
+        if ($atendimento) {
+            // Se o atendimento for encontrado, busca os eventos relacionados
+            $sqlEventos = "SELECT * FROM eventos WHERE atendimento_id = ? ORDER BY data_evento ASC";
+            $stmtEventos = $this->pdo->prepare($sqlEventos);
+            $stmtEventos->execute([$id]);
+            $atendimento['eventos'] = $stmtEventos->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        return $atendimento;
     }
 }

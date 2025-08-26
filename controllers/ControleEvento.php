@@ -14,7 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if (isset($_POST['excluir'])) {
         $eventoModel->excluirEvento($id);
-        header("Location: index.php?pagina={$pagina}&acao=listar");
+        // Redireciona para a página do atendimento pai, se o ID estiver disponível
+        $atendimento_id = $_POST['atendimento_id'] ?? null;
+        if ($atendimento_id) {
+            header("Location: index.php?pagina=atendimento&acao=show&id={$atendimento_id}");
+        } else {
+            header("Location: index.php?pagina={$pagina}&acao=listar");
+        }
         exit;
     } else {
         $dados = [
@@ -31,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $eventoModel->salvarEvento($dados);
         }
         
-        header("Location: index.php?pagina={$pagina}&acao=listar");
+        // Redireciona para a nova view show do atendimento pai
+        header("Location: index.php?pagina=atendimento&acao=show&id={$dados['atendimento_id']}");
         exit;
     }
 }

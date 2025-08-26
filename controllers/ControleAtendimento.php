@@ -54,7 +54,13 @@ switch ($acao) {
 
         $viewPath = ROOT_PATH . '/views/atendimento/listar.php';
         break;
-    
+        
+    case 'show': // Nova ação para a página de detalhes
+        $id = $_GET['id'] ?? null;
+        $atendimento = $atendimentoModel->getAtendimentoComEventosById($id);
+        $viewPath = ROOT_PATH . '/views/atendimento/show.php';
+        break;
+
     case 'cadastrar':
         $alunos = $alunoModel->listarAlunos();
         $professores = $professorModel->listarProfessores();
