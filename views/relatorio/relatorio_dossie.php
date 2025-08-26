@@ -8,13 +8,13 @@
 
             <div class="print-header">
                 <div class="text-center mb-3">
-                    <img src="/public/img/logo.png" alt="Logo Orienta" class="mb-2" style="max-height: 50px;">
-                    <br> <hr>
+                    <img src="/orienta/public/img/logo.png" alt="Logo Orienta" class="mb-2" style="max-height: 50px;">
                     <h5 class="mb-0">Escola Estadual de Ensino Fundamental e Médio Ruth Rocha</h5>
                     <p class="mb-0 fw-bold">Orientação Pedagógica</p>
                 </div>
                 <hr>
             </div>
+            
             <?php if (!empty($dossie)): ?>
             <div class="card shadow mb-4">
                 <div class="card-header bg-secondary text-white text-center">
@@ -64,43 +64,36 @@
     </div>
 </div>
 <style>
-  @media print {
-    /* Esconde elementos de navegação */
-    .no-print {
-        display: none !important;
-    }
-
-    /* Remove margens e preenchimentos do corpo da página */
-    body {
-        background-color: #fff !important; /* Fundo branco, como em um documento */
-        margin: 0 !important;
-        padding: 0 !important;
-        font-size: 10pt;
-    }
-
-    /* Expande o conteúdo para a largura total, removendo as margens do container */
-    .container, .container-fluid {
-        width: 100% !important;
-        max-width: 100% !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    /* Remove a margem lateral da coluna */
-    .col-md-10 {
-        padding: 0 !important;
-    }
-
-    /* Remove bordas e sombras para uma aparência de documento limpo */
-    .card, .card-header, .card-body {
-        border: none !important;
-        box-shadow: none !important;
-    }
-    
-    /* Torna o cabeçalho de impressão visível */
     .print-header {
-        display: block;
-        margin-bottom: 20px;
+        display: none;
     }
-}
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+        body {
+            background-color: #fff !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-size: 10pt;
+            line-height: 1.2;
+        }
+        .container, .container-fluid, .col-md-10 {
+            width: 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .card, .card-header, .card-body {
+            border: none !important;
+            box-shadow: none !important;
+        }
+        p, ul, li {
+            text-align: justify;
+        }
+        .print-header {
+            display: block;
+            margin-bottom: 20px;
+        }
+    }
 </style>
