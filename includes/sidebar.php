@@ -26,11 +26,7 @@
                     <i class="bi bi-journal-text"></i> <span>Atendimentos</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="index.php?pagina=evento&acao=listar">
-                    <i class="bi bi-calendar-event"></i> <span>Eventos</span>
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="index.php?pagina=relatorio&acao=listar">
                     <i class="bi bi-file-earmark-text"></i> <span>Relatórios</span>

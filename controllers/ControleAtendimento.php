@@ -2,10 +2,12 @@
 require_once ROOT_PATH . '/models/AtendimentoModel.php';
 require_once ROOT_PATH . '/models/AlunoModel.php';
 require_once ROOT_PATH . '/models/ProfessorModel.php';
+require_once ROOT_PATH . '/models/EventoModel.php';
 
 $atendimentoModel = new AtendimentoModel($pdo);
 $alunoModel = new AlunoModel($pdo);
 $professorModel = new ProfessorModel($pdo);
+$eventoModel = new EventoModel($pdo);
 
 $pagina = 'atendimento';
 $acao = $_GET['acao'] ?? 'listar';
@@ -43,7 +45,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 switch ($acao) {
     case 'listar':
         $atendimentos = $atendimentoModel->listarAtendimentos();
-        $viewPath = ROOT_PATH . '/views/atendimento/listar.php'; // Apenas define o caminho
+
+        // Para cada atendimento, busque os eventos relacionados
+        foreach ($atendimentos as &$atendimento) {
+            $atendimento['eventos'] = $eventoModel->getEventosByAtendimentoId($atendimento['id']);
+        }
+        unset($atendimento); // Importante para desfazer a referência
+
+        $viewPath = ROOT_PATH . '/views/atendimento/listar.php';
         break;
     
     case 'cadastrar':
