@@ -55,7 +55,7 @@
                                                     <?php foreach ($atendimento['eventos'] as $evento): ?>
                                                         <li class="list-group-item d-flex justify-content-between align-items-center py-1">
                                                             <div>
-                                                                **Evento ID <?php echo $evento['id']; ?>:** <?php echo htmlspecialchars($evento['titulo']); ?>
+                                                                **Evento ID <?php echo $evento['id']; ?>:** <?php echo htmlspecialchars($evento['descricao']); ?>
                                                                 <small class="text-muted d-block"><?php echo htmlspecialchars($evento['descricao']); ?></small>
                                                             </div>
                                                             <div>
