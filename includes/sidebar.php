@@ -46,7 +46,7 @@
     </div>
 </div>
 <div class="main-content">
-    <div class="topbar">
+    <div class="topbar nav justify-content-center">
         <div id="dailyVersesWrapper"></div>
         <script async defer src="https://dailyverses.net/get/random.js?language=arc"></script>
     </div>
