@@ -6,82 +6,83 @@
             <a href="index.php?pagina=atendimento&acao=cadastrar" class="btn btn-primary"><i class="bi bi-journal-plus"></i> Novo Atendimento</a>
         </div>
         
-        <div class="card shadow">
-            <div class="card-header bg-primary text-white">
-                <h3 class="card-title"><i class="bi bi-journal-text"></i> Lista de Atendimentos</h3>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Aluno</th>
-                                <th>Professor</th>
-                                <th>Data</th>
-                                <th>Descrição</th>
-                                <th>Status</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if (count($atendimentos) > 0): ?>
-                                <?php foreach ($atendimentos as $atendimento): ?>
-                                    <tr>
-                                        <td><?php echo $atendimento['id']; ?></td>
-                                        <td><?php echo htmlspecialchars($atendimento['nome_aluno']); ?></td>
-                                        <td><?php echo htmlspecialchars($atendimento['nome_professor']); ?></td>
-                                        <td><?php echo formatarData($atendimento['data_atendimento']); ?></td>
-                                        <td><?php echo htmlspecialchars($atendimento['descricao']); ?></td>
-                                        <td>
-                                            <span class="badge rounded-pill bg-<?php echo ($atendimento['status'] == 'aberto') ? 'warning' : (($atendimento['status'] == 'em_andamento') ? 'info' : 'success'); ?>">
-                                                <?php echo ucfirst(str_replace('_', ' ', $atendimento['status'])); ?>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a href="index.php?pagina=atendimento&acao=editar&id=<?php echo $atendimento['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+        <div class="accordion" id="accordionAtendimentos">
+            <?php if (!empty($atendimentos)): ?>
+                <?php foreach ($atendimentos as $index => $atendimento): ?>
+                    <div class="accordion-item shadow-sm mb-3">
+                        <h2 class="accordion-header" id="heading<?php echo $atendimento['id']; ?>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?php echo $atendimento['id']; ?>" aria-expanded="false" aria-controls="collapse<?php echo $atendimento['id']; ?>">
+                                <div class="row w-100">
+                                    <div class="col-md-3"><strong>Aluno:</strong> <?php echo htmlspecialchars($atendimento['nome_aluno']); ?></div>
+                                    <div class="col-md-3"><strong>Professor:</strong> <?php echo htmlspecialchars($atendimento['nome_professor']); ?></div>
+                                    <div class="col-md-3"><strong>Data:</strong> <?php echo formatarData($atendimento['data_atendimento']); ?></div>
+                                    <div class="col-md-3"><strong>Status:</strong> <span class="badge rounded-pill bg-<?php echo ($atendimento['status'] == 'aberto') ? 'warning' : (($atendimento['status'] == 'em_andamento') ? 'info' : 'success'); ?>">
+                                            <?php echo ucfirst(str_replace('_', ' ', $atendimento['status'])); ?>
+                                        </span>
+                                    </div>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapse<?php echo $atendimento['id']; ?>" class="accordion-collapse collapse" aria-labelledby="heading<?php echo $atendimento['id']; ?>" data-bs-parent="#accordionAtendimentos">
+                            <div class="accordion-body">
+                                <div class="card mb-3">
+                                    <div class="card-header bg-light">
+                                        <h5 class="mb-0"><i class="bi bi-file-earmark-text me-2"></i> Detalhes do Atendimento</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <p><strong>Descrição:</strong> <?php echo nl2br(htmlspecialchars($atendimento['descricao'])); ?></p>
+                                        <div class="mt-3">
+                                            <a href="index.php?pagina=atendimento&acao=editar&id=<?php echo $atendimento['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i> Editar Atendimento</a>
                                             <form method="POST" name="form-delete" style="display:inline-block">
                                                 <input type="hidden" name="id" value="<?php echo $atendimento['id']; ?>">
                                                 <input type="hidden" name="excluir" value="1">
-                                                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Excluir Atendimento</button>
                                             </form>
-                                        </td>
-                                    </tr>
-                                    <?php if (!empty($atendimento['eventos'])): ?>
-                                        <tr>
-                                            <td colspan="7">
-                                                <div class="d-flex align-items-center mb-1 ms-4"><i class="bi bi-calendar-event me-2"></i> Eventos relacionados:</div>
-                                                <ul class="list-group list-group-flush ms-5">
-                                                    <?php foreach ($atendimento['eventos'] as $evento): ?>
-                                                        <li class="list-group-item d-flex justify-content-between align-items-center py-1">
-                                                            <div>
-                                                                **Evento ID <?php echo $evento['id']; ?>:** <?php echo htmlspecialchars($evento['descricao']); ?>
-                                                                <small class="text-muted d-block"><?php echo htmlspecialchars($evento['descricao']); ?></small>
-                                                            </div>
-                                                            <div>
-                                                                <a href="index.php?pagina=evento&acao=editar&id=<?php echo $evento['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i> Editar</a>
-                                                                <form method="POST" name="form-delete" style="display:inline-block">
-                                                                    <input type="hidden" name="id" value="<?php echo $evento['id']; ?>">
-                                                                    <input type="hidden" name="excluir" value="1">
-                                                                    <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i> Excluir</button>
-                                                                </form>
-                                                            </div>
-                                                        </li>
-                                                    <?php endforeach; ?>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="7" class="text-center">Nenhum atendimento encontrado.</td>
-                                </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="card">
+                                    <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                        <h5 class="mb-0"><i class="bi bi-calendar-event me-2"></i> Eventos Relacionados</h5>
+                                        <a href="index.php?pagina=evento&acao=cadastrar&atendimento_id=<?php echo $atendimento['id']; ?>" class="btn btn-sm btn-success"><i class="bi bi-plus-circle"></i> Novo Evento</a>
+                                    </div>
+                                    <div class="card-body">
+                                        <?php if (!empty($atendimento['eventos'])): ?>
+                                            <ul class="list-group">
+                                                <?php foreach ($atendimento['eventos'] as $evento): ?>
+                                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                        <div>
+                                                            <h6 class="mb-1">Evento ID <?php echo $evento['id']; ?></h6>
+                                                            <p class="mb-0 text-muted"><?php echo htmlspecialchars($evento['descricao']); ?></p>
+                                                        </div>
+                                                        <div>
+                                                            <a href="index.php?pagina=evento&acao=editar&id=<?php echo $evento['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+                                                            <form method="POST" name="form-delete-evento" style="display:inline-block">
+                                                                <input type="hidden" name="id" value="<?php echo $evento['id']; ?>">
+                                                                <input type="hidden" name="excluir_evento" value="1">
+                                                                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                                            </form>
+                                                        </div>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php else: ?>
+                                            <div class="alert alert-info" role="alert">
+                                                Nenhum evento encontrado para este atendimento.
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <div class="alert alert-info text-center" role="alert">
+                    Nenhum atendimento encontrado.
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
