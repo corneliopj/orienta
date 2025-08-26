@@ -17,8 +17,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nome</th>
-                                <th>Email</th>
-                                <th>Telefone</th>
+                                <th>Disciplina</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
@@ -28,8 +27,7 @@
                                     <tr>
                                         <td><?php echo $professor['id']; ?></td>
                                         <td><?php echo htmlspecialchars($professor['nome']); ?></td>
-                                        <td><?php echo htmlspecialchars($professor['email']); ?></td>
-                                        <td><?php echo htmlspecialchars($professor['telefone']); ?></td>
+                                        <td><?php echo htmlspecialchars($professor['disciplina']); ?></td>
                                         <td>
                                             <a href="index.php?pagina=professor&acao=editar&id=<?php echo $professor['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
                                             <form method="POST" name="form-delete" style="display:inline-block">
@@ -42,7 +40,7 @@
                                 <?php endforeach; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="5" class="text-center">Nenhum professor encontrado.</td>
+                                    <td colspan="4" class="text-center">Nenhum professor encontrado.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
