@@ -71,9 +71,9 @@ body {
 
 /* Conteúdo Principal */
 .main-content {
-    margin-left: var(--sidebar-width);
+    margin-left: 250px; /* Mesma largura da sidebar */
     padding: 20px;
-    transition: all 0.3s;
+    transition: margin-left 0.3s ease;
 }
 
 /* Topbar */
