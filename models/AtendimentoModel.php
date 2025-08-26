@@ -67,4 +67,11 @@ class AtendimentoModel
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$id]);
     }
+    
+    public function getTotalAtendimentosAtivos()
+    {
+        $sql = "SELECT COUNT(*) FROM atendimentos WHERE status IN ('aberto', 'em_andamento')";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchColumn();
+    }
 }
