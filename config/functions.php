@@ -9,6 +9,13 @@ function formatDate($date, $format = 'd/m/Y') {
     $d = new DateTime($date);
     return $d->format($format);
 }
+function formatarData($data)
+{
+    if (!$data || $data === '0000-00-00 00:00:00') {
+        return 'N/A';
+    }
+    return date('d/m/Y', strtotime($data));
+}
 
 function formatDateTime($datetime, $format = 'd/m/Y H:i') {
     if (empty($datetime) || $datetime === '0000-00-00 00:00:00') {
