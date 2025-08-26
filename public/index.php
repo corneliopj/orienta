@@ -13,17 +13,39 @@ $acao = $_GET['acao'] ?? 'listar';
 $viewPath = '';
 $controllerPath = '';
 
+// Roteamento para os controladores
 switch ($pagina) {
     case 'dashboard':
-        $controllerPath = ROOT_PATH . '/controllers/ControleDashboard.php';
+        require_once ROOT_PATH . '/controllers/ControleDashboard.php';
         break;
+        
     case 'aluno':
-        $controllerPath = ROOT_PATH . '/controllers/ControleAlunos.php';
+        require_once ROOT_PATH . '/controllers/ControleAluno.php';
         break;
-    // Adicionar outros casos aqui para professores, atendimentos, etc.
+        
+    case 'professor':
+        require_once ROOT_PATH . '/controllers/ControleProfessor.php';
+        break;
+        
+    case 'atendimento':
+        // Lógica para o controlador de atendimentos
+        // require_once ROOT_PATH . '/controllers/ControleAtendimento.php';
+        break;
+        
+    case 'evento':
+        // Lógica para o controlador de eventos
+        // require_once ROOT_PATH . '/controllers/ControleEvento.php';
+        break;
+        
+    case 'relatorio':
+        // Lógica para o controlador de relatórios
+        // require_once ROOT_PATH . '/controllers/ControleRelatorio.php';
+        break;
+    
     default:
-        $controllerPath = ROOT_PATH . '/controllers/ControleDashboard.php';
-        break;
+        // Se a página não for encontrada, redireciona para a dashboard
+        header("Location: index.php?pagina=dashboard");
+        exit();
 }
 
 // Incluir o cabeçalho
