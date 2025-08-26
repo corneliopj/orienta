@@ -90,7 +90,7 @@ $offset = ($pagina - 1) * $limit;
                                 <?php foreach ($atendimentos as $atendimento): ?>
                                     <tr>
                                         <td><?php echo $atendimento['id']; ?></td>
-                                        <td><?php echo $atendimento['aluno']; ?></td>
+                                        <td><?php echo $atendimento['nome_aluno']; ?></td>
                                         <td><?php echo $atendimento['descricao']; ?></td>
                                         <td><?php echo $atendimento['data_atendimento']; ?></td>
                                         <td>
