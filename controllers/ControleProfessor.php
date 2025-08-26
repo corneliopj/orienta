@@ -32,20 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// AQUI VEM A CORREÇÃO
 switch ($acao) {
     case 'listar':
         $professores = $professorModel->listarProfessores();
-        include ROOT_PATH . '/views/professor/listar.php';
+        $viewPath = ROOT_PATH . '/views/professor/listar.php'; // APENAS ATRIBUI O CAMINHO
         break;
     
     case 'cadastrar':
-        include ROOT_PATH . '/views/professor/formulario.php';
+        $viewPath = ROOT_PATH . '/views/professor/formulario.php'; // APENAS ATRIBUI O CAMINHO
         break;
         
     case 'editar':
         $id = $_GET['id'] ?? null;
         $professor = $professorModel->getProfessorById($id);
-        include ROOT_PATH . '/views/professor/formulario.php';
+        $viewPath = ROOT_PATH . '/views/professor/formulario.php'; // APENAS ATRIBUI O CAMINHO
         break;
         
     default:
