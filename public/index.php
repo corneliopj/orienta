@@ -32,7 +32,7 @@ switch ($pagina) {
         
     case 'atendimento':
         // Lógica para o controlador de atendimentos
-        // require_once ROOT_PATH . '/controllers/ControleAtendimento.php';
+         require_once ROOT_PATH . '/controllers/ControleAtendimento.php';
         break;
         
     case 'evento':
