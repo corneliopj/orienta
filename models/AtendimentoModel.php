@@ -67,11 +67,30 @@ class AtendimentoModel
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$id]);
     }
-    
+
     public function getTotalAtendimentosAtivos()
     {
         $sql = "SELECT COUNT(*) FROM atendimentos WHERE status IN ('aberto', 'em_andamento')";
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchColumn();
+    }
+     public function getAtendimentosPaginados($limit, $offset)
+    {
+        $sql = "SELECT 
+                    a.id, a.descricao, a.data_atendimento, a.status, a.observacoes,
+                    al.nome as nome_aluno,
+                    p.nome as nome_professor
+                FROM atendimentos a
+                JOIN alunos al ON a.aluno_id = al.id
+                JOIN professores p ON a.professor_id = p.id
+                ORDER BY a.data_atendimento DESC
+                LIMIT ? OFFSET ?";
+        
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindValue(1, (int) $limit, PDO::PARAM_INT);
+        $stmt->bindValue(2, (int) $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
