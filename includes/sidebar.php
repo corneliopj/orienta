@@ -3,10 +3,10 @@
 <div class="sidebar">
     <div class="sidebar-brand">
         <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    <img src="/../public/img/logo.png" alt="Logo Orienta" class="img-fluid" style="max-height: 40px;">
-    <span class="fs-4 d-none d-sm-inline ms-2">Orienta</span>
+    <img src="/../public/img/logo.png" alt="Logo Orienta" class="img-fluid" style="max-height: 100px;">
+    <span class="fs-4 d-none d-sm-inline ms-2"><br>Orienta</span>
 </a>
-        <h4><i class="bi bi-heart-fill"></i> <span>Orienta</span></h4>
+        
     </div>
     <div class="sidebar-nav">
         <ul class="nav flex-column">
