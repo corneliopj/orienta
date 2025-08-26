@@ -6,6 +6,15 @@
                 <button onclick="window.print()" class="btn btn-success mb-4"><i class="bi bi-printer"></i> Imprimir</button>
             </div>
 
+            <div class="print-header">
+                <div class="text-center mb-3">
+                    <img src="/public/img/logo.png" alt="Logo Orienta" class="mb-2" style="max-height: 50px;">
+                    <br> <hr>
+                    <h5 class="mb-0">Escola Estadual de Ensino Fundamental e Médio Ruth Rocha</h5>
+                    <p class="mb-0 fw-bold">Orientação Pedagógica</p>
+                </div>
+                <hr>
+            </div>
             <?php if (!empty($dossie)): ?>
             <div class="card shadow mb-4">
                 <div class="card-header bg-secondary text-white text-center">
@@ -55,9 +64,23 @@
     </div>
 </div>
 <style>
+    .print-header {
+        display: none;
+    }
     @media print {
+        body {
+            font-size: 12pt;
+        }
         .no-print {
             display: none !important;
+        }
+        .print-header {
+            display: block;
+            margin-bottom: 20px;
+        }
+        .card, .card-header, .card-body {
+            border: none !important;
+            box-shadow: none !important;
         }
     }
 </style>
