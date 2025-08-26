@@ -47,6 +47,7 @@
 </div>
 <div class="main-content">
     <div class="topbar">
-       <center><iframe loading="lazy" height="180" marginheight="0" src="https://www.internautascristaos.org/arquivos/versiculos/versiculos.html" frameborder="no" width="500" scrolling="auto" name="textos1"</iframe><center>
+       <div id="dailyVersesWrapper"></div>
+<script async defer src="https://dailyverses.net/get/verse.js?language=arc"></script>
     </div>
     <div class="container-fluid">
