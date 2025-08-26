@@ -1,51 +1,70 @@
 <?php
-class AtendimentoModel {
+
+class AtendimentoModel
+{
     private $pdo;
 
-    public function __construct(PDO $pdo) {
+    public function __construct(PDO $pdo)
+    {
         $this->pdo = $pdo;
     }
 
-public function getTotalAtendimentos()
+    public function listarAtendimentos()
     {
-        $sql = "SELECT COUNT(*) FROM atendimentos";
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchColumn();
-    }
-
-    public function getAtendimentosPaginados($limit, $offset)
-    {
-        $sql = "
-            SELECT 
-                a.id, 
-                al.nome AS aluno, 
-                a.descricao, 
-                a.data_atendimento, 
-                a.status
-            FROM 
-                atendimentos a
-            JOIN 
-                alunos al ON a.aluno_id = al.id
-            ORDER BY 
-                a.data_atendimento DESC 
-            LIMIT :limit OFFSET :offset
-        ";
+        $sql = "SELECT 
+                    a.id, a.descricao, a.data_atendimento, a.status, a.observacoes,
+                    al.nome as nome_aluno,
+                    p.nome as nome_professor
+                FROM atendimentos a
+                JOIN alunos al ON a.aluno_id = al.id
+                JOIN professores p ON a.professor_id = p.id
+                ORDER BY a.data_atendimento DESC";
         
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
+        $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    public function getTotalAtendimentosAtivos() {
-        $stmt = $this->pdo->query("SELECT COUNT(*) FROM atendimentos WHERE status = 'aberto' OR status = 'em_andamento'");
-        return $stmt->fetchColumn();
+    
+    public function salvarAtendimento($dados)
+    {
+        $sql = "INSERT INTO atendimentos (aluno_id, professor_id, data_atendimento, descricao, status, observacoes) VALUES (?, ?, ?, ?, ?, ?)";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            $dados['aluno_id'],
+            $dados['professor_id'],
+            $dados['data_atendimento'],
+            $dados['descricao'] ?? null,
+            $dados['status'],
+            $dados['observacoes'] ?? null
+        ]);
     }
-
-    public function getTotalEventos() {
-        $stmt = $this->pdo->query("SELECT COUNT(*) FROM eventos");
-        return $stmt->fetchColumn();
+    
+    public function getAtendimentoById($id)
+    {
+        $sql = "SELECT * FROM atendimentos WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function atualizarAtendimento($id, $dados)
+    {
+        $sql = "UPDATE atendimentos SET aluno_id = ?, professor_id = ?, data_atendimento = ?, descricao = ?, status = ?, observacoes = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            $dados['aluno_id'],
+            $dados['professor_id'],
+            $dados['data_atendimento'],
+            $dados['descricao'] ?? null,
+            $dados['status'],
+            $dados['observacoes'] ?? null,
+            $id
+        ]);
+    }
+    
+    public function excluirAtendimento($id)
+    {
+        $sql = "DELETE FROM atendimentos WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$id]);
     }
 }

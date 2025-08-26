@@ -3,7 +3,7 @@
         <h2 class="page-header">Gerenciamento de Atendimentos</h2>
         
         <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3">
-            <a href="atendimentos.php?editar=0" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Novo Atendimento</a>
+            <a href="index.php?pagina=atendimento&acao=cadastrar" class="btn btn-primary"><i class="bi bi-journal-plus"></i> Novo Atendimento</a>
         </div>
         
         <div class="card shadow">
@@ -16,36 +16,43 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Data</th>
                                 <th>Aluno</th>
                                 <th>Professor</th>
+                                <th>Data</th>
+                                <th>Descrição</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($atendimentos as $at): ?>
-                                <?php
-                                $statusClass = $at['status'] == 'aberto' ? 'bg-warning' : 
-                                              ($at['status'] == 'em_andamento' ? 'bg-info' : 'bg-success');
-                                ?>
+                            <?php if (count($atendimentos) > 0): ?>
+                                <?php foreach ($atendimentos as $atendimento): ?>
+                                    <tr>
+                                        <td><?php echo $atendimento['id']; ?></td>
+                                        <td><?php echo htmlspecialchars($atendimento['nome_aluno']); ?></td>
+                                        <td><?php echo htmlspecialchars($atendimento['nome_professor']); ?></td>
+                                        <td><?php echo formatarData($atendimento['data_atendimento']); ?></td>
+                                        <td><?php echo htmlspecialchars($atendimento['descricao']); ?></td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-<?php echo ($atendimento['status'] == 'aberto') ? 'warning' : (($atendimento['status'] == 'em_andamento') ? 'info' : 'success'); ?>">
+                                                <?php echo ucfirst(str_replace('_', ' ', $atendimento['status'])); ?>
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <a href="index.php?pagina=atendimento&acao=editar&id=<?php echo $atendimento['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
+                                            <form method="POST" name="form-delete" style="display:inline-block">
+                                                <input type="hidden" name="id" value="<?php echo $atendimento['id']; ?>">
+                                                <input type="hidden" name="excluir" value="1">
+                                                <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            <?php else: ?>
                                 <tr>
-                                    <td><?php echo $at['id']; ?></td>
-                                    <td><?php echo formatDate($at['data_atendimento']); ?></td>
-                                    <td><?php echo htmlspecialchars($at['aluno_nome']); ?></td>
-                                    <td><?php echo htmlspecialchars($at['professor_nome']); ?></td>
-                                    <td><span class="badge <?php echo $statusClass; ?> badge-status"><?php echo ucfirst($at['status']); ?></span></td>
-                                    <td>
-                                        <a href="atendimentos.php?editar=<?php echo $at['id']; ?>" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i></a>
-                                        <form method="POST" name="form-delete" style="display:inline-block">
-                                            <input type="hidden" name="id" value="<?php echo $at['id']; ?>">
-                                            <input type="hidden" name="excluir" value="1">
-                                            <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></button>
-                                        </form>
-                                        <a href="eventos.php?atendimento_id=<?php echo $at['id']; ?>" class="btn btn-sm btn-info"><i class="bi bi-list-task"></i></a>
-                                    </td>
+                                    <td colspan="7" class="text-center">Nenhum atendimento encontrado.</td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endif; ?>
                         </tbody>
                     </table>
                 </div>
