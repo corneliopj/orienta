@@ -10,7 +10,12 @@ class AlunoModel {
         $stmt = $this->pdo->query("SELECT * FROM alunos ORDER BY nome");
         return $stmt->fetchAll();
     }
-
+    public function listarAlunos()
+    {
+        $sql = "SELECT id, nome FROM alunos ORDER BY nome ASC";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function getAlunoById($id) {
         $stmt = $this->pdo->prepare("SELECT * FROM alunos WHERE id = ?");
         $stmt->execute([$id]);
