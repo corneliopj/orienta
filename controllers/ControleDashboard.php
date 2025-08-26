@@ -35,4 +35,5 @@ $relatorios = $relatorioModel->getRelatorios();
 
 // Definir a visualização
 $tituloPagina = "Dashboard";
-include ROOT_PATH . '/views/dashboard.php';
+// Definir a visualização
+$viewPath = ROOT_PATH . '/views/dashboard.php';
