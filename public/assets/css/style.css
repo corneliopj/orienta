@@ -86,8 +86,15 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-align: center;
 }
+ .dailyVerses.bibleVerse {
+            margin-top: .5em;
+        }
 
+        .dailyVerses.bibleVerse a {
+            font-weight: bold;
+        }
 .search-container {
     position: relative;
     width: 300px;

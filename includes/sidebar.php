@@ -47,7 +47,8 @@
 </div>
 <div class="main-content">
     <div class="topbar">
-       <div id="dailyVersesWrapper"></div>
-<script async defer src="https://dailyverses.net/get/verse.js?language=arc"></script>
+        <div id="dailyVersesWrapper"></div>
+        <script async defer src="https://dailyverses.net/get/random.js?language=arc"></script>
     </div>
+
     <div class="container-fluid">
