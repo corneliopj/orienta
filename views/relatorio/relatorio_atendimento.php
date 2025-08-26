@@ -71,29 +71,37 @@
     </div>
 </div>
 <style>
-    @media print {
-    /* Oculta os elementos de navegação */
+     @media print {
+    /* Esconde elementos de navegação */
     .no-print {
         display: none !important;
     }
 
-    /* Expande o conteúdo para a largura total da folha */
-    .container, .col-md-10, .card {
+    /* Remove margens e preenchimentos do corpo da página */
+    body {
+        background-color: #fff !important; /* Fundo branco, como em um documento */
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 12pt;
+    }
+
+    /* Expande o conteúdo para a largura total, removendo as margens do container */
+    .container, .container-fluid {
         width: 100% !important;
         max-width: 100% !important;
-        padding: 0 !important;
         margin: 0 !important;
+        padding: 0 !important;
     }
-    
-    /* Remove a sombra e a borda dos cards para um visual mais limpo na impressão */
+
+    /* Remove a margem lateral da coluna */
+    .col-md-10 {
+        padding: 0 !important;
+    }
+
+    /* Remove bordas e sombras para uma aparência de documento limpo */
     .card, .card-header, .card-body {
         border: none !important;
         box-shadow: none !important;
-    }
-
-    /* Garante que o texto seja legível */
-    body {
-        font-size: 12pt;
     }
     
     /* Torna o cabeçalho de impressão visível */
