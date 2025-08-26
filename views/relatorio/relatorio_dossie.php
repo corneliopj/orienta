@@ -75,7 +75,7 @@
         background-color: #fff !important; /* Fundo branco, como em um documento */
         margin: 0 !important;
         padding: 0 !important;
-        font-size: 12pt;
+        font-size: 10pt;
     }
 
     /* Expande o conteúdo para a largura total, removendo as margens do container */
