@@ -50,4 +50,25 @@ class AlunoModel {
         $stmt = $this->pdo->prepare("DELETE FROM alunos WHERE id = ?");
         $stmt->execute([$id]);
     }
+    public function getDossieAluno($id)
+    {
+        $dossie = $this->getAlunoById($id);
+        if ($dossie) {
+            $sqlAtendimentos = "SELECT id, professor_id, data_atendimento, descricao, status FROM atendimentos WHERE aluno_id = ? ORDER BY data_atendimento ASC";
+            $stmtAtendimentos = $this->pdo->prepare($sqlAtendimentos);
+            $stmtAtendimentos->execute([$id]);
+            $atendimentos = $stmtAtendimentos->fetchAll(PDO::FETCH_ASSOC);
+
+            require_once ROOT_PATH . '/models/EventoModel.php';
+            $eventoModel = new EventoModel($this->pdo);
+
+            foreach ($atendimentos as &$atendimento) {
+                $atendimento['eventos'] = $eventoModel->getEventosByAtendimentoId($atendimento['id']);
+            }
+            unset($atendimento);
+            
+            $dossie['atendimentos'] = $atendimentos;
+        }
+        return $dossie;
+    }
 }

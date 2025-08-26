@@ -128,4 +128,14 @@ class AtendimentoModel
 
         return $atendimento;
     }
+    public function atualizarCamposRelatorio($id, $dados)
+    {
+        $sql = "UPDATE atendimentos SET manifestacao = ?, decisao_diretor = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([
+            $dados['manifestacao'],
+            $dados['decisao_diretor'],
+            $id
+        ]);
+    }
 }
