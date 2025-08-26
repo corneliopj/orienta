@@ -4,7 +4,7 @@ define('ROOT_PATH', __DIR__ . '/..');
 
 // Carregar arquivos de configuração e classes
 require_once ROOT_PATH . '/config/config.php';
-require_once ROOT_PATH . '/config/functions.php'; // Manter temporariamente para formatação de data
+require_once ROOT_PATH . '/config/functions.php';
 
 // Definir a página e ação padrão
 $pagina = $_GET['pagina'] ?? 'dashboard';
@@ -47,11 +47,11 @@ switch ($pagina) {
         exit();
 }
 
-// Incluir o cabeçalho
+// Incluir o cabeçalho (apenas o HTML inicial)
 require_once ROOT_PATH . '/includes/header.php';
+
+// Incluir o sidebar e a abertura do main-content
 require_once ROOT_PATH . '/includes/sidebar.php';
-
-
 
 
 // Carregar o controlador, se houver
