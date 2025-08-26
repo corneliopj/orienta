@@ -2,9 +2,9 @@
 
 <div class="sidebar">
     <div class="sidebar-brand">
-        <a href="index.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    <img src="/../public/img/logo.png" alt="Logo Orienta" class="img-fluid" style="max-height: 100px;">
-    <br><span class="fs-4 d-none d-sm-inline ms-2">Orienta</span>
+       <a href="index.php" class="d-flex flex-column align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <img src="/../public/img/logo.png" alt="Logo Orienta" class="mb-2" style="max-height: 50px;">
+    <span class="fs-4 d-none d-sm-inline">Orienta</span>
 </a>
         
     </div>
