@@ -47,6 +47,6 @@
 </div>
 <div class="main-content">
     <div class="topbar">
-       <a href="index.php">Sistema de Acompanhamento Educacional </a>
+       <iframe id="versiculo-del-dia" src="https://www.bibliatodo.com/pt/online/versiculo-del-dia-texto-2" style="width: 100%; height: 25vh;" frameborder="0" scrolling="no"></iframe>
     </div>
     <div class="container-fluid">
