@@ -74,6 +74,8 @@ class AtendimentoModel
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchColumn();
     }
+
+    
      public function getAtendimentosPaginados($limit, $offset)
     {
         $sql = "SELECT 
@@ -92,5 +94,12 @@ class AtendimentoModel
         $stmt->execute();
         
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTotalAtendimentos()
+    {
+        $sql = "SELECT COUNT(*) FROM atendimentos";
+        $stmt = $this->pdo->query($sql);
+        return $stmt->fetchColumn();
     }
 }
