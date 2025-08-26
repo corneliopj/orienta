@@ -8,11 +8,11 @@
             
             <div class="print-header">
                 <div class="text-center mb-3">
-                    <img src="/orienta/public/img/logo.png" alt="Logo Orienta" class="mb-2" style="max-height: 100px;">
-                    <h5 class="mb-0">Escola Estadual de Ensino Fundamental e Médio Ruth Rocha</h5>
-                    <p class="mb-0 fw-bold">Orientação Pedagógica</p>
+                    <img src="/public/img/logo.png" alt="Logo Orienta" class="mb-2" style="max-height: 100px;">
+                    <br>
+                    <h5 class="mb-0">Escola E.E.F.M Ruth Rocha</h5>
+                    <p class="mb-0 fw-bold">Orientação Pedagógica</p><hr>
                 </div>
-                <hr>
             </div>
 
             <div class="card shadow">
