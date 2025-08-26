@@ -37,7 +37,7 @@ switch ($pagina) {
         
     case 'evento':
         // Lógica para o controlador de eventos
-        // require_once ROOT_PATH . '/controllers/ControleEvento.php';
+         require_once ROOT_PATH . '/controllers/ControleEvento.php';
         break;
         
     case 'relatorio':

@@ -1,53 +1,42 @@
 <div class="row">
-    <div class="col">
-        <h2 class="page-header"><?php echo $id ? 'Editar Evento' : 'Registrar Novo Evento'; ?></h2>
-        
+    <div class="col-md-8 offset-md-2">
+        <h2 class="page-header"><?php echo isset($evento) ? 'Editar Evento' : 'Novo Evento'; ?></h2>
+
         <div class="card shadow">
             <div class="card-header bg-primary text-white">
-                <h3 class="card-title"><i class="bi bi-calendar-plus"></i> <?php echo $id ? 'Editar Evento' : 'Registrar Evento'; ?></h3>
+                <h3 class="card-title"><i class="bi bi-calendar-event"></i> Formulário de Evento</h3>
             </div>
             <div class="card-body">
-                <form method="POST">
-                    <input type="hidden" name="id" value="<?php echo htmlspecialchars($evento['id'] ?? ''); ?>">
-                    <input type="hidden" name="atendimento_id" value="<?php echo htmlspecialchars($atendimento['id']); ?>">
+                <form action="index.php?pagina=evento" method="POST">
+                    <input type="hidden" name="id" value="<?php echo $evento['id'] ?? ''; ?>">
                     
                     <div class="mb-3">
-                        <label class="form-label">Atendimento</label>
-                        <input type="text" class="form-control" value="Atendimento #<?php echo htmlspecialchars($atendimento['id']); ?>" disabled>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Data e Hora *</label>
-                            <input type="text" class="form-control datetime-mask" name="data_evento" placeholder="dd/mm/aaaa hh:mm" value="<?php echo htmlspecialchars(formatDateTime($evento['data_evento'] ?? '')); ?>" required>
-                        </div>
-                        
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Tipo de Evento *</label>
-                            <select class="form-select" name="tipo" required>
-                                <option value="conversa" <?php echo (isset($evento) && $evento['tipo'] == 'conversa') ? 'selected' : ''; ?>>Conversa</option>
-                                <option value="ligacao" <?php echo (isset($evento) && $evento['tipo'] == 'ligacao') ? 'selected' : ''; ?>>Ligação</option>
-                                <option value="abordagem" <?php echo (isset($evento) && $evento['tipo'] == 'abordagem') ? 'selected' : ''; ?>>Abordagem</option>
-                                <option value="reuniao" <?php echo (isset($evento) && $evento['tipo'] == 'reuniao') ? 'selected' : ''; ?>>Reunião</option>
-                                <option value="outro" <?php echo (isset($evento) && $evento['tipo'] == 'outro') ? 'selected' : ''; ?>>Outro</option>
-                            </select>
-                        </div>
+                        <label for="atendimento_id" class="form-label">ID do Atendimento</label>
+                        <input type="number" class="form-control" id="atendimento_id" name="atendimento_id" value="<?php echo $evento['atendimento_id'] ?? $_GET['atendimento_id'] ?? ''; ?>" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label">Participantes</label>
-                        <input type="text" class="form-control" name="participantes" value="<?php echo htmlspecialchars($evento['participantes'] ?? ''); ?>">
+                        <label for="data_evento" class="form-label">Data e Hora do Evento</label>
+                        <input type="datetime-local" class="form-control" id="data_evento" name="data_evento" value="<?php echo $evento['data_evento'] ?? ''; ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="tipo" class="form-label">Tipo de Evento</label>
+                        <input type="text" class="form-control" id="tipo" name="tipo" value="<?php echo $evento['tipo'] ?? ''; ?>" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="participantes" class="form-label">Participantes</label>
+                        <input type="text" class="form-control" id="participantes" name="participantes" value="<?php echo $evento['participantes'] ?? ''; ?>" required>
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label">Descrição *</label>
-                        <textarea class="form-control" name="descricao" rows="5" required><?php echo htmlspecialchars($evento['descricao'] ?? ''); ?></textarea>
+                        <label for="descricao" class="form-label">Descrição</label>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="4"><?php echo $evento['descricao'] ?? ''; ?></textarea>
                     </div>
                     
-                    <div class="d-grid gap-2 d-md-flex">
-                        <button type="submit" class="btn btn-primary me-md-2"><i class="bi bi-save"></i> Salvar</button>
-                        <a href="eventos.php?atendimento_id=<?php echo $atendimento['id']; ?>" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
-                    </div>
+                    <button type="submit" class="btn btn-primary"><i class="bi bi-save"></i> Salvar Evento</button>
+                    <a href="index.php?pagina=evento&acao=listar" class="btn btn-secondary"><i class="bi bi-x-circle"></i> Cancelar</a>
                 </form>
             </div>
         </div>
