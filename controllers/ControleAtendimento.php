@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 switch ($acao) {
     case 'listar':
         $atendimentos = $atendimentoModel->listarAtendimentos();
-        $viewPath = ROOT_PATH . '/views/atendimento/listar.php';
+        $viewPath = ROOT_PATH . '/views/atendimento/listar.php'; // Apenas define o caminho
         break;
     
     case 'cadastrar':
