@@ -4,19 +4,23 @@ require_once ROOT_PATH . '/models/AlunoModel.php';
 require_once ROOT_PATH . '/models/ProfessorModel.php';
 require_once ROOT_PATH . '/models/AtendimentoModel.php';
 require_once ROOT_PATH . '/models/RelatorioModel.php';
+// Instanciar o modelo de eventos
+require_once ROOT_PATH . '/models/EventoModel.php';
+
+
 
 // Instanciar os modelos
 $alunoModel = new AlunoModel($pdo);
 $professorModel = new ProfessorModel($pdo);
 $atendimentoModel = new AtendimentoModel($pdo);
 $relatorioModel = new RelatorioModel($pdo);
-
+$eventoModel = new EventoModel($pdo);
 // --- Lógica para o Dashboard ---
 
 // Estatísticas
 $totalAlunos = $alunoModel->getTotalAlunos();
 $totalAtendimentosAtivos = $atendimentoModel->getTotalAtendimentosAtivos();
-$totalEventos = $atendimentoModel->getTotalEventos();
+$totalEventos = $eventoModel->getTotalEventos();
 $totalRelatoriosPendentes = $relatorioModel->getTotalRelatoriosPendentes();
 
 // Atendimentos Recentes
