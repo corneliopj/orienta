@@ -13,7 +13,6 @@ $acao = $_GET['acao'] ?? 'listar';
 $viewPath = '';
 $controllerPath = '';
 
-// Roteamento para os controladores
 switch ($pagina) {
     case 'dashboard':
         require_once ROOT_PATH . '/controllers/ControleDashboard.php';
