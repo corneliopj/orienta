@@ -1,6 +1,6 @@
 
 
-<div class="sidebar">
+<div class="sidebar no-print">
     <div class="sidebar-brand">
        <a href="index.php" class="d-flex flex-column align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <img src="/../public/img/logo.png" alt="Logo Orienta" class="mb-2" style="max-height: 150px;">
@@ -46,7 +46,7 @@
     </div>
 </div>
 <div class="main-content">
-    <div class="topbar nav justify-content-center .bg-success.bg-gradient">
+    <div class="topbar nav justify-content-center .bg-success.bg-gradient no-print">
         <div id="dailyVersesWrapper"></div>
         <script async defer src="https://dailyverses.net/get/random.js?language=arc"></script>
     </div>
