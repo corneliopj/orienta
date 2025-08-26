@@ -9,9 +9,12 @@ class ProfessorModel
     }
 
     // Listar todos os professores
-    public function listarProfessores()
-    {
-        $stmt = $this->pdo->query("SELECT * FROM professores ORDER BY nome");
+    public function listarProfessores() {
+        // Seleciona todas as colunas necessárias da tabela 'professores'
+        $sql = "SELECT id, nome, email, telefone FROM professores";
+        $stmt = $this->pdo->query($sql);
+        
+        // Retorna o resultado como um array de objetos ou um array vazio se não houver resultados
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
