@@ -50,4 +50,19 @@
     </div>
 </div>
 <div class="main-content">
-       <div class="container-fluid">
+    <div class="topbar">
+        <div class="search-container">
+            <i class="bi bi-search"></i>
+            <input type="text" class="form-control" placeholder="Pesquisar...">
+        </div>
+        <div class="user-info">
+            <div class="notifications me-3">
+                <i class="bi bi-bell-fill text-secondary"></i>
+                <span class="badge bg-danger badge-number">3</span>
+            </div>
+            <div class="user-avatar">
+                RP
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
