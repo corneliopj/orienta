@@ -72,8 +72,34 @@
 </div>
 <style>
     @media print {
-        .no-print {
-            display: none !important;
-        }
+    /* Oculta os elementos de navegação */
+    .no-print {
+        display: none !important;
     }
+
+    /* Expande o conteúdo para a largura total da folha */
+    .container, .col-md-10, .card {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    /* Remove a sombra e a borda dos cards para um visual mais limpo na impressão */
+    .card, .card-header, .card-body {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    /* Garante que o texto seja legível */
+    body {
+        font-size: 12pt;
+    }
+    
+    /* Torna o cabeçalho de impressão visível */
+    .print-header {
+        display: block;
+        margin-bottom: 20px;
+    }
+}
 </style>
