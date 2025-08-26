@@ -42,7 +42,7 @@ switch ($pagina) {
         
     case 'relatorio':
         // Lógica para o controlador de relatórios
-        // require_once ROOT_PATH . '/controllers/ControleRelatorio.php';
+         require_once ROOT_PATH . '/controllers/ControleRelatorio.php';
         break;
     
     default:
