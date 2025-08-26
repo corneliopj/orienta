@@ -11,7 +11,7 @@
                     <img src="/public/img/logo.png" alt="Logo Orienta" class="mb-2" style="max-height: 100px;">
                     <br>
                     <h5 class="mb-0">Escola E.E.F.M Ruth Rocha</h5><br>
-                    <p class="mb-0 fw-bold">Orientação Pedagógica</p>
+                    <h6 class="mb-0 fw-bold">Orientação Pedagógica</h6>
                 </div>
                 <hr>
             </div>
