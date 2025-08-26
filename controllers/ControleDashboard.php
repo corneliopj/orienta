@@ -28,10 +28,11 @@ $atendimentos = $atendimentoModel->getAtendimentosPaginados($itensPorPagina, $of
 $totalPaginasAtendimentos = ceil($atendimentoModel->getTotalAtendimentos() / $itensPorPagina);
 
 // Professores Cadastrados
-$professores = $professorModel->getProfessores();
+$professoresCadastrados = $professorModel->listarProfessores();
 
 // Relatórios Emitidos
 $relatorios = $relatorioModel->getRelatorios();
 
-// Definir a visualização (view) a ser carregada
-$viewPath = ROOT_PATH . '/views/dashboard.php';
+// Definir a visualização
+$tituloPagina = "Dashboard";
+include ROOT_PATH . '/views/dashboard.php';
