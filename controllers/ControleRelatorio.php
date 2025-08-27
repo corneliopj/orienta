@@ -46,16 +46,12 @@ switch ($acao) {
 
             if ($atendimentoModel->atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor)) {
                 // Sucesso
-                echo "DEBUG: Ação de salvamento bem-sucedida! Verifique a saída abaixo.";
-            die(); // Força a parada do script
-                //header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=sucesso");
-               // exit();
+                header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=sucesso");
+                exit();
             } else {
                 // Erro
-                echo "DEBUG: Ação de salvamento bem-sucedida! Verifique a saída abaixo.";
-            die(); // Força a parada do script
-                //header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=erro");
-               // exit();
+                header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=erro");
+                exit();
             }
         }
         break;
