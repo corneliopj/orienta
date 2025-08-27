@@ -58,7 +58,7 @@
                     
                     <hr>
                     
-                    <form action="index.php?pagina=relatorio&acao=atendimento" method="POST">
+                    <form action="index.php?pagina=relatorio&acao=salvar_relatorio" method="POST">
                         <input type="hidden" name="atendimento_id" value="<?php echo htmlspecialchars($atendimento['id'] ?? ''); ?>">
                         
                         <div class="mb-3">
