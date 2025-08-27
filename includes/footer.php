@@ -2,9 +2,9 @@
 </div>
 </div>
 
-<footer class="py-3 bg-light no-print" style="position: absolute; bottom: 10px; width: 100%;">
+<footer class="footer mt-auto py-3 bg-light no-print">
     <div class="container text-center">
-        <p class="mb-0"><?php echo SITE_NAME; ?> &copy; <?php echo date('Y'); ?></p>
+        <p class="mb-0">Sistema de Acompanhamento Educacional &copy; <?php echo date('Y'); ?></p>
     </div>
 </footer>
 
