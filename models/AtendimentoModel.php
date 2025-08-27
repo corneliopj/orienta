@@ -7,11 +7,23 @@ class AtendimentoModel {
         $this->conexao = $pdo;
     }
 
+    public function listarAtendimentos() {
+        $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor, a.status 
+                FROM atendimentos a
+                JOIN alunos al ON a.aluno_id = al.id
+                JOIN professores p ON a.professor_id = p.id
+                ORDER BY a.data_atendimento DESC";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     public function getAtendimentoComEventosById($id) {
-        $sql = "SELECT a.*, al.nome as nome_aluno, p.nome as nome_professor 
+        $sql = "SELECT a.*, al.nome AS nome_aluno, p.nome AS nome_professor, r.manifestacao, r.decisao_diretor
                 FROM atendimentos a 
                 JOIN alunos al ON a.aluno_id = al.id 
-                JOIN professores p ON a.professor_id = p.id 
+                JOIN professores p ON a.professor_id = p.id
+                LEFT JOIN relatorios r ON a.id = r.atendimento_id
                 WHERE a.id = :id";
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(':id', $id);
@@ -34,7 +46,6 @@ class AtendimentoModel {
     
     public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor) {
         try {
-            // Primeiro, verifique se já existe um relatório para este atendimento
             $sql = "SELECT id FROM relatorios WHERE atendimento_id = :atendimento_id";
             $stmt = $this->conexao->prepare($sql);
             $stmt->bindValue(':atendimento_id', $atendimento_id);
@@ -42,11 +53,9 @@ class AtendimentoModel {
             $relatorio = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($relatorio) {
-                // Se o relatório existe, atualize-o
                 $sql = "UPDATE relatorios SET manifestacao = :manifestacao, decisao_diretor = :decisao_diretor WHERE atendimento_id = :atendimento_id";
                 $stmt = $this->conexao->prepare($sql);
             } else {
-                // Se não, insira um novo relatório
                 $sql = "INSERT INTO relatorios (atendimento_id, manifestacao, decisao_diretor) VALUES (:atendimento_id, :manifestacao, :decisao_diretor)";
                 $stmt = $this->conexao->prepare($sql);
             }
