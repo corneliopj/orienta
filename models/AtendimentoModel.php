@@ -7,15 +7,35 @@ class AtendimentoModel {
         $this->conexao = $pdo;
     }
     
-    public function atualizarAtendimento($id, $aluno_id, $professor_id, $data_atendimento, $descricao, $status) {
-        $sql = "UPDATE atendimentos SET aluno_id = :aluno_id, professor_id = :professor_id, data_atendimento = :data_atendimento, descricao = :descricao, status = :status WHERE id = :id";
+    public function atualizarAtendimento($id, $dados) {
+        $sql = "UPDATE atendimentos SET aluno_id = :aluno_id, professor_id = :professor_id, data_atendimento = :data_atendimento, descricao = :descricao, status = :status, observacoes = :observacoes WHERE id = :id";
         $stmt = $this->conexao->prepare($sql);
         $stmt->bindValue(':id', $id);
-        $stmt->bindValue(':aluno_id', $aluno_id, PDO::PARAM_INT);
-        $stmt->bindValue(':professor_id', $professor_id, PDO::PARAM_INT);
-        $stmt->bindValue(':data_atendimento', $data_atendimento);
-        $stmt->bindValue(':descricao', $descricao);
-        $stmt->bindValue(':status', $status);
+        $stmt->bindValue(':aluno_id', $dados['aluno_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':professor_id', $dados['professor_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':data_atendimento', $dados['data_atendimento']);
+        $stmt->bindValue(':descricao', $dados['descricao']);
+        $stmt->bindValue(':status', $dados['status']);
+        $stmt->bindValue(':observacoes', $dados['observacoes']);
+        return $stmt->execute();
+    }
+    
+    public function salvarAtendimento($dados) {
+        $sql = "INSERT INTO atendimentos (aluno_id, professor_id, data_atendimento, descricao, status, observacoes) VALUES (:aluno_id, :professor_id, :data_atendimento, :descricao, :status, :observacoes)";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(':aluno_id', $dados['aluno_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':professor_id', $dados['professor_id'], PDO::PARAM_INT);
+        $stmt->bindValue(':data_atendimento', $dados['data_atendimento']);
+        $stmt->bindValue(':descricao', $dados['descricao']);
+        $stmt->bindValue(':status', $dados['status']);
+        $stmt->bindValue(':observacoes', $dados['observacoes']);
+        return $stmt->execute();
+    }
+    
+    public function excluirAtendimento($id) {
+        $sql = "DELETE FROM atendimentos WHERE id = :id";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
 
