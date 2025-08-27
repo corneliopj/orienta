@@ -35,9 +35,20 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label">Data do Atendimento *</label>
-                        <input type="text" class="form-control date-mask" name="data_atendimento" value="<?php echo htmlspecialchars($atendimento['data_atendimento'] ?? ''); ?>" required>
-                    </div>
+    <label for="data_atendimento" class="form-label">Data do Atendimento</label>
+    <div class="input-group">
+        <?php
+        $data_formatada = null;
+        if (isset($atendimento['data_atendimento'])) {
+            $data_formatada = date('d/m/Y', strtotime($atendimento['data_atendimento']));
+        }
+        ?>
+        <input type="date" class="form-control" id="data_atendimento" name="data_atendimento" value="<?php echo htmlspecialchars($atendimento['data_atendimento'] ?? ''); ?>" required>
+        <?php if ($data_formatada): ?>
+            <span class="input-group-text"><?php echo $data_formatada; ?></span>
+        <?php endif; ?>
+    </div>
+</div>
                     
                     <div class="mb-3">
                         <label class="form-label">Descrição *</label>
