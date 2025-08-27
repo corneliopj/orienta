@@ -39,6 +39,7 @@ switch ($acao) {
         break;
 
     case 'salvar_relatorio':
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $atendimento_id = $_POST['atendimento_id'] ?? null;
             $manifestacao = $_POST['manifestacao'] ?? '';
@@ -54,7 +55,8 @@ switch ($acao) {
                 exit();
             }
         }
-        break;
+        
+       break;
         
     case 'listar':
     default:
