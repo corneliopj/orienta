@@ -128,14 +128,13 @@ class AtendimentoModel
 
         return $atendimento;
     }
-    public function atualizarCamposRelatorio($id, $dados)
-    {
-        $sql = "UPDATE atendimentos SET manifestacao = ?, decisao_diretor = ? WHERE id = ?";
-        $stmt = $this->pdo->prepare($sql);
-        return $stmt->execute([
-            $dados['manifestacao'],
-            $dados['decisao_diretor'],
-            $id
-        ]);
-    }
+   public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor) {
+    // A query deve ser executada na tabela `relatorios`, não em `atendimentos`
+    $sql = "UPDATE relatorios SET manifestacao = :manifestacao, decisao_diretor = :decisao_diretor WHERE atendimento_id = :atendimento_id";
+    $stmt = $this->conexao->prepare($sql);
+    $stmt->bindValue(':manifestacao', $manifestacao);
+    $stmt->bindValue(':decisao_diretor', $decisao_diretor);
+    $stmt->bindValue(':atendimento_id', $atendimento_id);
+    return $stmt->execute();
+}
 }
