@@ -130,6 +130,11 @@ class AtendimentoModel
     }
 
 public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor) {
+    echo "<h1>Depuração do AtendimentoModel</h1>";
+    echo "<p>ID do Atendimento: " . htmlspecialchars($atendimento_id) . "</p>";
+    echo "<p>Manifestação: " . htmlspecialchars($manifestacao) . "</p>";
+    echo "<p>Decisão do Diretor: " . htmlspecialchars($decisao_diretor) . "</p>";
+    
     try {
         // Primeiro, verifique se já existe um relatório para este atendimento
         $sql = "SELECT id FROM relatorios WHERE atendimento_id = :atendimento_id";
@@ -146,6 +151,8 @@ public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisa
             $stmt->bindValue(':manifestacao', $manifestacao);
             $stmt->bindValue(':decisao_diretor', $decisao_diretor);
             $result = $stmt->execute();
+            echo "<p>Query: UPDATE</p>";
+            echo "<p>Resultado da execução: " . ($result ? 'SUCESSO' : 'FALHA') . "</p>";
 
         } else {
             // Se não, insira um novo relatório
@@ -155,9 +162,11 @@ public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisa
             $stmt->bindValue(':manifestacao', $manifestacao);
             $stmt->bindValue(':decisao_diretor', $decisao_diretor);
             $result = $stmt->execute();
+            echo "<p>Query: INSERT</p>";
+            echo "<p>Resultado da execução: " . ($result ? 'SUCESSO' : 'FALHA') . "</p>";
         }
 
-        // Se a execução falhou, imprima o erro para depuração
+        // Se a execução falhou, imprima o erro do PDO para depuração
         if (!$result) {
             echo "<pre>";
             print_r($stmt->errorInfo());
@@ -168,7 +177,8 @@ public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisa
 
     } catch (PDOException $e) {
         // Exibe o erro de exceção
-        echo "Erro de PDO: " . $e->getMessage();
+        echo "<h2>Erro de PDO:</h2>";
+        echo "<pre>" . $e->getMessage() . "</pre>";
         return false;
     }
 }

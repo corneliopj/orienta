@@ -46,12 +46,12 @@ switch ($acao) {
 
             if ($atendimentoModel->atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor)) {
                 // Sucesso
-                header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=sucesso");
-                exit();
+                //header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=sucesso");
+               // exit();
             } else {
                 // Erro
-                header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=erro");
-                exit();
+                //header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=erro");
+               // exit();
             }
         }
         break;
