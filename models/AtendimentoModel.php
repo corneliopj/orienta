@@ -128,13 +128,36 @@ class AtendimentoModel
 
         return $atendimento;
     }
-   public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor) {
-    // A query deve ser executada na tabela `relatorios`, não em `atendimentos`
-    $sql = "UPDATE relatorios SET manifestacao = :manifestacao, decisao_diretor = :decisao_diretor WHERE atendimento_id = :atendimento_id";
-    $stmt = $this->conexao->prepare($sql);
-    $stmt->bindValue(':manifestacao', $manifestacao);
-    $stmt->bindValue(':decisao_diretor', $decisao_diretor);
-    $stmt->bindValue(':atendimento_id', $atendimento_id);
-    return $stmt->execute();
+
+public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor) {
+    try {
+        // Primeiro, verifique se já existe um relatório para este atendimento
+        $sql = "SELECT id FROM relatorios WHERE atendimento_id = :atendimento_id";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(':atendimento_id', $atendimento_id);
+        $stmt->execute();
+        $relatorio = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($relatorio) {
+            // Se o relatório existe, atualize-o
+            $sql = "UPDATE relatorios SET manifestacao = :manifestacao, decisao_diretor = :decisao_diretor WHERE atendimento_id = :atendimento_id";
+            $stmt = $this->conexao->prepare($sql);
+        } else {
+            // Se não, insira um novo relatório
+            $sql = "INSERT INTO relatorios (atendimento_id, data_relatorio, manifestacao, decisao_diretor) VALUES (:atendimento_id, NOW(), :manifestacao, :decisao_diretor)";
+            $stmt = $this->conexao->prepare($sql);
+        }
+
+        $stmt->bindValue(':atendimento_id', $atendimento_id);
+        $stmt->bindValue(':manifestacao', $manifestacao);
+        $stmt->bindValue(':decisao_diretor', $decisao_diretor);
+
+        return $stmt->execute();
+
+    } catch (PDOException $e) {
+        // Logar o erro para depuração
+        error_log("Erro ao atualizar ou inserir relatório: " . $e->getMessage());
+        return false;
+    }
 }
 }
