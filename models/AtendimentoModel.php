@@ -142,21 +142,33 @@ public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisa
             // Se o relatório existe, atualize-o
             $sql = "UPDATE relatorios SET manifestacao = :manifestacao, decisao_diretor = :decisao_diretor WHERE atendimento_id = :atendimento_id";
             $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':atendimento_id', $atendimento_id);
+            $stmt->bindValue(':manifestacao', $manifestacao);
+            $stmt->bindValue(':decisao_diretor', $decisao_diretor);
+            $result = $stmt->execute();
+
         } else {
             // Se não, insira um novo relatório
-            $sql = "INSERT INTO relatorios (atendimento_id, data_relatorio, manifestacao, decisao_diretor) VALUES (:atendimento_id, NOW(), :manifestacao, :decisao_diretor)";
+            $sql = "INSERT INTO relatorios (atendimento_id, manifestacao, decisao_diretor) VALUES (:atendimento_id, :manifestacao, :decisao_diretor)";
             $stmt = $this->conexao->prepare($sql);
+            $stmt->bindValue(':atendimento_id', $atendimento_id);
+            $stmt->bindValue(':manifestacao', $manifestacao);
+            $stmt->bindValue(':decisao_diretor', $decisao_diretor);
+            $result = $stmt->execute();
         }
 
-        $stmt->bindValue(':atendimento_id', $atendimento_id);
-        $stmt->bindValue(':manifestacao', $manifestacao);
-        $stmt->bindValue(':decisao_diretor', $decisao_diretor);
+        // Se a execução falhou, imprima o erro para depuração
+        if (!$result) {
+            echo "<pre>";
+            print_r($stmt->errorInfo());
+            echo "</pre>";
+        }
 
-        return $stmt->execute();
+        return $result;
 
     } catch (PDOException $e) {
-        // Logar o erro para depuração
-        error_log("Erro ao atualizar ou inserir relatório: " . $e->getMessage());
+        // Exibe o erro de exceção
+        echo "Erro de PDO: " . $e->getMessage();
         return false;
     }
 }
