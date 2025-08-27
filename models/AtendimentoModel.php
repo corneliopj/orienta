@@ -14,6 +14,20 @@ class AtendimentoModel {
         return $stmt->fetchColumn();
     }
     
+    public function getAtendimentosPaginados($limit, $offset) {
+        $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor, a.status 
+                FROM atendimentos a
+                JOIN alunos al ON a.aluno_id = al.id
+                JOIN professores p ON a.professor_id = p.id
+                ORDER BY a.data_atendimento DESC
+                LIMIT :limit OFFSET :offset";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
     public function listarAtendimentos() {
         $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor, a.status 
                 FROM atendimentos a
