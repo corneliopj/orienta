@@ -16,16 +16,7 @@ switch ($acao) {
         $id = $_GET['id'] ?? null;
         if (!$id) {
             $atendimentos_para_relatorio = $atendimentoModel->listarAtendimentosPendentes();
-            
-            // Lógica de Paginação para Relatórios Gerados
-            $por_pagina = 10;
-            $pagina_atual = isset($_GET['p']) ? (int)$_GET['p'] : 1;
-            $offset = ($pagina_atual - 1) * $por_pagina;
-
-            $relatorios_gerados = $atendimentoModel->listarRelatoriosExistentes($por_pagina, $offset);
-            $total_relatorios = $atendimentoModel->getTotalRelatoriosExistentes();
-            $total_paginas = ceil($total_relatorios / $por_pagina);
-
+            $relatorios_gerados = $atendimentoModel->listarRelatoriosExistentes();
             $viewPath = ROOT_PATH . '/views/relatorio/relatorio_atendimento_selecionar.php';
         } else {
             $atendimento = $atendimentoModel->getAtendimentoComEventosById($id);
