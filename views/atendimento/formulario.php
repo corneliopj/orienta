@@ -43,9 +43,9 @@
             $data_formatada = date('d/m/Y', strtotime($atendimento['data_atendimento']));
         }
         ?>
-        <input type="date" class="form-control" id="data_atendimento" name="data_atendimento" value="<?php echo htmlspecialchars($atendimento['data_atendimento'] ?? ''); ?>" required>
+        <input type="date" class="form-control" id="data_atendimento" name="data_atendimento" size="20" value="<?php echo htmlspecialchars($atendimento['data_atendimento'] ?? ''); ?>" required>
         <?php if ($data_formatada): ?>
-            <span class="input-group-text"><?php echo $data_formatada; ?></span>
+          
         <?php endif; ?>
     </div>
 </div>
