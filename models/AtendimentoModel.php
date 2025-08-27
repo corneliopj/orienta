@@ -18,13 +18,14 @@ class AtendimentoModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
-    public function listarRelatoriosExistentes() {
-        $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor, r.data_relatorio
+    public function listarAtendimentosPendentes() {
+        $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor
                 FROM atendimentos a
-                JOIN relatorios r ON a.id = r.atendimento_id
+                LEFT JOIN relatorios r ON a.id = r.atendimento_id
                 JOIN alunos al ON a.aluno_id = al.id
                 JOIN professores p ON a.professor_id = p.id
-                ORDER BY r.data_relatorio DESC";
+                WHERE r.atendimento_id IS NULL
+                ORDER BY a.data_atendimento DESC";
         $stmt = $this->conexao->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -54,6 +55,28 @@ class AtendimentoModel {
         $stmt->bindValue(':atendimento_id', $atendimento_id);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    
+    public function listarRelatoriosExistentes($limit = 10, $offset = 0) {
+        $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor, r.data_relatorio
+                FROM atendimentos a
+                JOIN relatorios r ON a.id = r.atendimento_id
+                JOIN alunos al ON a.aluno_id = al.id
+                JOIN professores p ON a.professor_id = p.id
+                ORDER BY r.data_relatorio DESC
+                LIMIT :limit OFFSET :offset";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTotalRelatoriosExistentes() {
+        $sql = "SELECT COUNT(*) FROM relatorios";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
     
     public function atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor) {
