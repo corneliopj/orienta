@@ -6,6 +6,18 @@ class AtendimentoModel {
     public function __construct(PDO $pdo) {
         $this->conexao = $pdo;
     }
+    
+    public function atualizarAtendimento($id, $aluno_id, $professor_id, $data_atendimento, $descricao, $status) {
+        $sql = "UPDATE atendimentos SET aluno_id = :aluno_id, professor_id = :professor_id, data_atendimento = :data_atendimento, descricao = :descricao, status = :status WHERE id = :id";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':aluno_id', $aluno_id, PDO::PARAM_INT);
+        $stmt->bindValue(':professor_id', $professor_id, PDO::PARAM_INT);
+        $stmt->bindValue(':data_atendimento', $data_atendimento);
+        $stmt->bindValue(':descricao', $descricao);
+        $stmt->bindValue(':status', $status);
+        return $stmt->execute();
+    }
 
     public function getTotalAtendimentos() {
         $sql = "SELECT COUNT(*) FROM atendimentos";
