@@ -7,6 +7,13 @@ class AtendimentoModel {
         $this->conexao = $pdo;
     }
 
+    public function getTotalAtendimentos() {
+        $sql = "SELECT COUNT(*) FROM atendimentos";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+    
     public function getTotalAtendimentosAtivos() {
         $sql = "SELECT COUNT(*) FROM atendimentos WHERE status = 'ativo'";
         $stmt = $this->conexao->prepare($sql);
