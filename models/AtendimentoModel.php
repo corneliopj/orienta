@@ -22,7 +22,7 @@ class AtendimentoModel {
     }
     
     public function getAtendimentosPaginados($limit, $offset) {
-        $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor, a.status 
+        $sql = "SELECT a.id, a.data_atendimento, a.descricao, al.nome AS nome_aluno, p.nome AS nome_professor, a.status 
                 FROM atendimentos a
                 JOIN alunos al ON a.aluno_id = al.id
                 JOIN professores p ON a.professor_id = p.id
@@ -36,7 +36,7 @@ class AtendimentoModel {
     }
     
     public function listarAtendimentos() {
-        $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor, a.status 
+        $sql = "SELECT a.id, a.data_atendimento, a.descricao, al.nome AS nome_aluno, p.nome AS nome_professor, a.status 
                 FROM atendimentos a
                 JOIN alunos al ON a.aluno_id = al.id
                 JOIN professores p ON a.professor_id = p.id
@@ -47,7 +47,7 @@ class AtendimentoModel {
     }
     
     public function listarAtendimentosPendentes() {
-        $sql = "SELECT a.id, a.data_atendimento, al.nome AS nome_aluno, p.nome AS nome_professor
+        $sql = "SELECT a.id, a.data_atendimento, a.descricao, al.nome AS nome_aluno, p.nome AS nome_professor
                 FROM atendimentos a
                 LEFT JOIN relatorios r ON a.id = r.atendimento_id
                 JOIN alunos al ON a.aluno_id = al.id
