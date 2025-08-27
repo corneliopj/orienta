@@ -45,6 +45,18 @@ class AtendimentoModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    public function getAtendimentoById($id) {
+        $sql = "SELECT a.*, al.nome AS nome_aluno, p.nome AS nome_professor
+                FROM atendimentos a 
+                JOIN alunos al ON a.aluno_id = al.id
+                JOIN professores p ON a.professor_id = p.id
+                WHERE a.id = :id";
+        $stmt = $this->conexao->prepare($sql);
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
     
     public function listarAtendimentosPendentes() {
         $sql = "SELECT a.id, a.data_atendimento, a.descricao, al.nome AS nome_aluno, p.nome AS nome_professor
