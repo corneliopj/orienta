@@ -50,7 +50,23 @@ switch ($acao) {
             $viewPath = ROOT_PATH . '/views/relatorio/relatorio_dossie.php';
         }
         break;
-    
+    case 'salvar_relatorio':
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $atendimento_id = $_POST['atendimento_id'] ?? null;
+        $manifestacao = $_POST['manifestacao'] ?? '';
+        $decisao_diretor = $_POST['decisao_diretor'] ?? '';
+
+        if ($atendimentoModel->atualizarCamposRelatorio($atendimento_id, $manifestacao, $decisao_diretor)) {
+            // Sucesso
+            header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=sucesso");
+            exit();
+        } else {
+            // Erro
+            header("Location: index.php?pagina=relatorio&acao=atendimento&id=$atendimento_id&status=erro");
+            exit();
+        }
+    }
+    break;
     case 'listar':
     default:
         $viewPath = ROOT_PATH . '/views/relatorio/listar.php';
