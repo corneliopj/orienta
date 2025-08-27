@@ -12,20 +12,21 @@ $pagina = 'relatorio';
 $acao = $_GET['acao'] ?? 'listar';
 
 switch ($acao) {
-    case 'atendimento':
-        $id = $_GET['id'] ?? null;
-        if (!$id) {
-            $atendimentos = $atendimentoModel->listarAtendimentos(); // Para a lista de seleção
-            $viewPath = ROOT_PATH . '/views/relatorio/relatorio_atendimento_selecionar.php';
-        } else {
-            $atendimento = $atendimentoModel->getAtendimentoComEventosById($id);
-            if (!$atendimento) {
-                header("Location: index.php?pagina=atendimento&acao=listar");
-                exit;
-            }
-            $viewPath = ROOT_PATH . '/views/relatorio/relatorio_atendimento.php';
+case 'atendimento':
+    $id = $_GET['id'] ?? null;
+    if (!$id) {
+        $atendimentos_para_relatorio = $atendimentoModel->listarAtendimentos(); // Lista para criar um novo relatório
+        $relatorios_gerados = $atendimentoModel->listarRelatoriosExistentes(); // Lista dos relatórios já gerados
+        $viewPath = ROOT_PATH . '/views/relatorio/relatorio_atendimento_selecionar.php';
+    } else {
+        $atendimento = $atendimentoModel->getAtendimentoComEventosById($id);
+        if (!$atendimento) {
+            header("Location: index.php?pagina=atendimento&acao=listar");
+            exit;
         }
-        break;
+        $viewPath = ROOT_PATH . '/views/relatorio/relatorio_atendimento.php';
+    }
+    break;
 
     case 'dossie':
         $id = $_GET['id'] ?? null;
