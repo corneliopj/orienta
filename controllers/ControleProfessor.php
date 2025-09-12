@@ -16,9 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $dados = [
             'nome' => $_POST['nome'],
-            'email' => $_POST['email'],
-            'telefone' => $_POST['telefone'],
-            'observacoes' => $_POST['observacoes']
+            'disciplina' => $_POST['disciplina'] ?? null
         ];
 
         if ($id) {

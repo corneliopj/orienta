@@ -11,7 +11,7 @@ class ProfessorModel
     // Listar todos os professores
     public function listarProfessores()
     {
-        // Seleciona apenas as colunas existentes na tabela 'professores'
+        // Seleciona apenas as colunas nome e disciplina da tabela
         $sql = "SELECT id, nome, disciplina FROM professores ORDER BY nome";
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -25,29 +25,25 @@ class ProfessorModel
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    // Salvar um novo professor
+    // Salvar um novo professor com nome e disciplina
     public function salvarProfessor($dados)
     {
-        $sql = "INSERT INTO professores (nome, email, telefone, observacoes) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO professores (nome, disciplina) VALUES (?, ?)";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
             $dados['nome'],
-            $dados['email'],
-            $dados['telefone'],
-            $dados['observacoes']
+            $dados['disciplina']
         ]);
     }
 
-    // Atualizar um professor existente
+    // Atualizar um professor existente com nome e disciplina
     public function atualizarProfessor($id, $dados)
     {
-        $sql = "UPDATE professores SET nome = ?, email = ?, telefone = ?, observacoes = ? WHERE id = ?";
+        $sql = "UPDATE professores SET nome = ?, disciplina = ? WHERE id = ?";
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([
             $dados['nome'],
-            $dados['email'],
-            $dados['telefone'],
-            $dados['observacoes'],
+            $dados['disciplina'],
             $id
         ]);
     }
