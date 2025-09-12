@@ -16,20 +16,10 @@
                     </div>
                     
                     <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($professor['email'] ?? ''); ?>">
+                        <label class="form-label">Disciplina</label>
+                        <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($professor['disciplina'] ?? ''); ?>">
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Telefone</label>
-                        <input type="text" class="form-control phone-mask" name="telefone" value="<?php echo htmlspecialchars($professor['telefone'] ?? ''); ?>">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Observações</label>
-                        <textarea class="form-control" name="observacoes" rows="3"><?php echo htmlspecialchars($professor['observacoes'] ?? ''); ?></textarea>
-                    </div>
-                    
                     <div class="d-grid gap-2 d-md-flex">
                         <button type="submit" class="btn btn-primary me-md-2"><i class="bi bi-save"></i> Salvar</button>
                         <a href="index.php?pagina=professor&acao=listar" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Voltar</a>
