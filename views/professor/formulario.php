@@ -17,7 +17,7 @@
                     
                     <div class="mb-3">
                         <label class="form-label">Disciplina</label>
-                        <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($professor['disciplina'] ?? ''); ?>">
+                        <input type="text" class="form-control" name="disciplina" value="<?php echo htmlspecialchars($professor['disciplina'] ?? ''); ?>">
                     </div>
 
                     <div class="d-grid gap-2 d-md-flex">
